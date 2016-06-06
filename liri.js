@@ -1,7 +1,7 @@
 // Main
 
 var request = require('request');
-var twitter = require('twitter');
+var Twitter = require('twitter');
 var spotify = require('spotify');
 
 var fs = require('fs');
@@ -39,13 +39,26 @@ function doSwitch() {
 
 function myTweets() {
 	
+	console.log(keys.twitterKeys);
+	var client = new Twitter(keys.twitterKeys);
+	console.log(client);
+	client.get('statuses/user_timeline', {screen_name: 'johnriepe', count: 20}, function(error, tweets, response) {
+   	//console.log(tweets);
+   	//console.log(response);
+   	for (var prop in tweets) {
+   		console.log(tweets[prop].text);
+		console.log(tweets[prop].created_at);
+	}
+	}); // end client.get 
+
+	
 // last 20 tweets console.log()
 
 }
 
 
 function spotifyThis() {
-	if (value = null) {
+	if (!value) {
 		
 	}
 // if no song = "what's my age again" by blink 182
