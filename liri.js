@@ -39,10 +39,11 @@ function doSwitch() {
 
 function myTweets() {
 	
-	console.log(keys.twitterKeys);
+	// console.log(keys.twitterKeys);
 	var client = new Twitter(keys.twitterKeys);
-	console.log(client);
-	client.get('statuses/user_timeline', {screen_name: 'johnriepe', count: 20}, function(error, tweets, response) {
+	var userName = "johnriepe"
+	// console.log(client);
+	client.get('statuses/user_timeline', {screen_name: userName, count: 20}, function(error, tweets, response) {
    	//console.log(tweets);
    	//console.log(response);
    	for (var prop in tweets) {
@@ -59,8 +60,24 @@ function myTweets() {
 
 function spotifyThis() {
 	if (!value) {
-		
+		value = "what's my age again";
 	}
+
+	spotify.search({type: "track", query: value, limit: 1}, function(err, data) {
+    if (err) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+    //console.log(data.tracks.items[0]);
+    for (var prop in data.tracks.items[0].artists) {
+   		console.log(data.tracks.items[0].artists[prop].name);
+	}
+    console.log(data.tracks.items[0].name);
+    console.log(data.tracks.items[0].preview_url);
+    console.log(data.tracks.items[0].album.name);
+    	 
+	});
+
 // if no song = "what's my age again" by blink 182
 // console.log()
 // 1. artist(s)
@@ -108,11 +125,14 @@ request(url, function(err, response, body) {
 
 function doWhat() {
 	fs.readFile('./random.txt', "utf8", function(err, data){
-		data = data.split(', ');
+		data = data.split(',');
 		console.log(data);
+
 		action = data[0];
+		
 		value = data[1];
-		doSwitch();
+		
+		doSwitch(action);
 	}); // end fs.readFile	
 
 }
