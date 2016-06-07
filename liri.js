@@ -47,11 +47,14 @@ function myTweets() {
 	client.get('statuses/user_timeline', {screen_name: userName, count: 20}, function(error, tweets, response) {
    	//console.log(tweets);
    	//console.log(response);
+   	
+   	console.log("******************************************************");
+	fs.appendFile('log.txt', "******************************************************" + '\n');
    	for (var prop in tweets) {
-   		console.log(tweets[prop].text);
-		console.log(tweets[prop].created_at);
-		fs.appendFile('log.txt', tweets[prop].text + '\n');
-		fs.appendFile('log.txt', tweets[prop].created_at + '\n');
+   		console.log('Tweet: ' + tweets[prop].text);
+		console.log('Created: ' + tweets[prop].created_at);
+		fs.appendFile('log.txt', 'Tweet: ' + tweets[prop].text + '\n');
+		fs.appendFile('log.txt', 'Created: ' + tweets[prop].created_at + '\n');
 	}
 	}); // end client.get 
 
@@ -67,23 +70,25 @@ function spotifyThis() {
 	}
 
 	spotify.search({type: "track", query: value, limit: 1}, function(err, data) {
+    console.log("******************************************************");
+	fs.appendFile('log.txt', "******************************************************" + '\n');
     if (err) {
         console.log('Error occurred: ' + err);
         return;
     }
     //console.log(data.tracks.items[0]);
     for (var prop in data.tracks.items[0].artists) {
-   		console.log(data.tracks.items[0].artists[prop].name);
-   		fs.appendFile('log.txt', data.tracks.items[0].artists[prop].name + '\n');
+   		console.log('Artist: ' + data.tracks.items[0].artists[prop].name);
+   		fs.appendFile('log.txt', 'Artist: ' + data.tracks.items[0].artists[prop].name + '\n');
 	}
-    console.log(data.tracks.items[0].name);
-    fs.appendFile('log.txt', data.tracks.items[0].name + '\n')
-    console.log(data.tracks.items[0].preview_url);
-    fs.appendFile('log.txt', data.tracks.items[0].preview_url + '\n')
-    console.log(data.tracks.items[0].album.name);
-    fs.appendFile('log.txt', data.tracks.items[0].album.name + '\n')
+    console.log('Song Name: ' + data.tracks.items[0].name);
+    fs.appendFile('log.txt', 'Song Name: ' + data.tracks.items[0].name + '\n')
+    console.log('Preview Link: ' + data.tracks.items[0].preview_url);
+    fs.appendFile('log.txt', 'Preview Link: ' + data.tracks.items[0].preview_url + '\n')
+    console.log('Album: ' + data.tracks.items[0].album.name);
+    fs.appendFile('log.txt', 'Album: ' + data.tracks.items[0].album.name + '\n')
     	 
-	});
+	}); // end spotify.search
 
 // if no song = "what's my age again" by blink 182
 // console.log()
@@ -107,25 +112,26 @@ var url = 'http://www.omdbapi.com/?t='+value+'&plot=short&tomatoes=true&r=json';
 
 request(url, function(err, response, body) {
 	body = JSON.parse(body);
-
-	console.log(body.Title);
-	fs.appendFile('log.txt', body.Title + '\n')
-	console.log(body.Year);
-	fs.appendFile('log.txt', body.Year + '\n')
-	console.log(body.imdbRating);
-	fs.appendFile('log.txt', body.imdbRating + '\n')
-	console.log(body.Country);
-	fs.appendFile('log.txt', body.Country + '\n')
-	console.log(body.Language);
-	fs.appendFile('log.txt', body.Language + '\n')
-	console.log(body.Plot);
-	fs.appendFile('log.txt', body.Plot + '\n')
-	console.log(body.Actors);
-	fs.appendFile('log.txt', body.Actors + '\n')
-	console.log(body.tomatoRating);
-	fs.appendFile('log.txt', body.tomatoRating + '\n')
-	console.log(body.tomatoURL);
-	fs.appendFile('log.txt', body.tomatoURL + '\n')
+	console.log("******************************************************");
+	fs.appendFile('log.txt', "******************************************************" + '\n')
+	console.log('Title: ' + body.Title);
+	fs.appendFile('log.txt', 'Title: ' + body.Title + '\n')
+	console.log('Year: ' + body.Year);
+	fs.appendFile('log.txt', 'Year: ' + body.Year + '\n')
+	console.log('IMDB Rating: ' + body.imdbRating);
+	fs.appendFile('log.txt', 'IMDB Rating: ' + body.imdbRating + '\n')
+	console.log('Country: ' + body.Country);
+	fs.appendFile('log.txt', 'Country: ' + body.Country + '\n')
+	console.log('Language: ' + body.Language);
+	fs.appendFile('log.txt', 'Language: ' + body.Language + '\n')
+	console.log('Plot: ' + body.Plot);
+	fs.appendFile('log.txt', 'Plot: ' + body.Plot + '\n')
+	console.log('Actors: ' + body.Actors);
+	fs.appendFile('log.txt', 'Actors: ' + body.Actors + '\n')
+	console.log('Rotten Tomatoes Rating: ' + body.tomatoRating);
+	fs.appendFile('log.txt', 'Roten Tomatoes Rating: ' + body.tomatoRating + '\n')
+	console.log('Rotten Tomatoes URL: ' + body.tomatoURL);
+	fs.appendFile('log.txt', 'Rotten Tomatoes URL: ' + body.tomatoURL + '\n')
 })
 // if no movie is provided then the program will output information for the movie: 'Mr. Nobody'
 // console.log()
