@@ -32,6 +32,15 @@ function doSwitch() {
 	    case 'do-what-it-says':
 	        doWhat();
 	        break;
+	    default	:
+	    	console.log("******************************************************");
+	    	console.log("Please enter one of the following options:");
+	    	console.log("1. my-tweets");
+	    	console.log("2. spotify-this-song");
+	    	console.log("3. movie-this");
+	    	console.log("4. do-what-it-says");
+	    	break;
+	    
 	} // end switch
 } // end function doSwitch
 
@@ -148,7 +157,7 @@ request(url, function(err, response, body) {
 } // end function movieThis()
 
 
-// function doWhat() gets information from text file that determines
+// function doWhat() gets information from text file (random.txt) that determines
 // which of the three above functions is called and what search item is used
 // it gets info and passes that back to doSwitch() to process
 
@@ -161,7 +170,7 @@ function doWhat() {
 		
 		value = data[1];
 		
-		doSwitch(action);
+		doSwitch();
 	}); // end fs.readFile	
 
 } // end function doWhat()
