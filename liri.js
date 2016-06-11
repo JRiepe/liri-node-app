@@ -85,7 +85,7 @@ function spotifyThis() {
         console.log('Error occurred: ' + err);
         return;
     }
-    //console.log(data.tracks.items[0]);
+    //console.log(JSON.stringify(data, null, 2));
     for (var prop in data.tracks.items[0].artists) {
    		console.log('Artist: ' + data.tracks.items[0].artists[prop].name);
    		fs.appendFile('log.txt', 'Artist: ' + data.tracks.items[0].artists[prop].name + '\n');
